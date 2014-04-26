@@ -23,24 +23,34 @@ namespace TransJakartaLocator
             //BuildLocalizedApplicationBar();
         }
 
-        private void tbFromPoint_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void ButtonFromPoint_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Pages/FromPoint.xaml", UriKind.Relative));
         }
 
-        private void tbNearest_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void ButtonNearest_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             Geolocator geolocator = new Geolocator();
 
             if (geolocator.LocationStatus == PositionStatus.Disabled)
             {
-                MessageBox.Show("Location is disabled in phone. Enable it from phone settings",
+                MessageBox.Show("Location dinonaktifkan pada ponsel ini. Aktifkan location melalui pengaturan ponsel.",
                        "Location", MessageBoxButton.OK);
 
                 return;
             }
 
             NavigationService.Navigate(new Uri("/Pages/GetNearest.xaml", UriKind.Relative));
+        }
+
+        private void ButtonAbout_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/About.xaml", UriKind.Relative));
+        }
+
+        private void ButtonHelp_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Pages/Help.xaml", UriKind.Relative));
         }
 
         // Sample code for building a localized ApplicationBar

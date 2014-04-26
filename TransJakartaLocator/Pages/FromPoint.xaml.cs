@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using TransJakartaLocator.Model;
 using TransJakartaLocator.Utils;
 using Newtonsoft.Json;
+using System.Windows.Media;
 
 namespace TransJakartaLocator.Pages
 {
@@ -52,7 +53,7 @@ namespace TransJakartaLocator.Pages
 
                 if (root.results.Count() == 0)
                 {
-                    MessageBox.Show("Place not found.", "Result", MessageBoxButton.OK);
+                    MessageBox.Show("Tempat tidak ditemukan. Anda dapat memilih manual dengan melakukan long click pada map.", "Hasil", MessageBoxButton.OK);
                     return;
                 }
 
@@ -75,9 +76,13 @@ namespace TransJakartaLocator.Pages
 
                     // Generate pushpin content
                     StackPanel panel = new StackPanel();
+                    panel.Orientation = System.Windows.Controls.Orientation.Horizontal;
                     TextBlock text = new TextBlock();
                     text.Text = item.formatted_address.Replace(",", ",\n");
+                    Button button = new Button();
+                    button.Content = "Cari Shelter";
                     panel.Children.Add(text);
+                    panel.Children.Add(button);
                     panel.Visibility = Visibility.Collapsed;
                     pushpin.Content = panel;
 
@@ -125,7 +130,7 @@ namespace TransJakartaLocator.Pages
                         this.Nearest = nearest;
 
                         MainMap.Center = new System.Device.Location.GeoCoordinate(nearest.DoubleLat, nearest.DoubleLon);
-                        MainMap.ZoomLevel = 13;
+                        //MainMap.ZoomLevel = 13;
 
                         Pushpin pushpin = new Pushpin();
 
@@ -133,8 +138,10 @@ namespace TransJakartaLocator.Pages
                         StackPanel panel = new StackPanel();
                         TextBlock text = new TextBlock();
                         text.Text = nearest.Name;
+                    
                         panel.Children.Add(text);
                         pushpin.Content = panel;
+                        pushpin.Background = new SolidColorBrush(Color.FromArgb(255, 50, 50, 255));
 
                         pushpin.GeoCoordinate = new GeoCoordinate(nearest.DoubleLat, nearest.DoubleLon);
                         pushpin.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(PushpinTap);
@@ -149,6 +156,7 @@ namespace TransJakartaLocator.Pages
 
                         // Add the MapLayer to the Map.
                         MainMap.Layers.Add(shelterLocationLayer);
+                        MainMap.Center = pushpin.GeoCoordinate;
                     }
                 }
             }
@@ -168,8 +176,8 @@ namespace TransJakartaLocator.Pages
                 }
                 else if (content.Visibility == Visibility.Visible)
                 {
-                    MessageBoxResult result = MessageBox.Show("Get navigation to the shelter?",
-                        "Confirm", MessageBoxButton.OKCancel);
+                    MessageBoxResult result = MessageBox.Show("Lihat navigasi menuju shelter?",
+                        "Konfirmasi", MessageBoxButton.OKCancel);
 
                     if (result == MessageBoxResult.OK)
                     {
@@ -254,9 +262,14 @@ namespace TransJakartaLocator.Pages
 
             // Generate pushpin content
             StackPanel panel = new StackPanel();
+            panel.Orientation = System.Windows.Controls.Orientation.Horizontal;
             TextBlock text = new TextBlock();
-            text.Text = "Find shelter \nnear this point";
+            text.Text = "Cari shelter \nterdekat?";
+            Button button = new Button();
+            button.Content = "Cari Shelter";
+                    
             panel.Children.Add(text);
+            panel.Children.Add(button);
             pushpin.Content = panel;
 
             pushpin.GeoCoordinate = new GeoCoordinate(location.Latitude, location.Longitude);

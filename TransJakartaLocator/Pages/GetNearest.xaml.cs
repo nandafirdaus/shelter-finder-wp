@@ -15,6 +15,7 @@ using TransJakartaLocator.Utils;
 using Microsoft.Phone.Maps.Controls;
 using Microsoft.Phone.Maps.Toolkit;
 using System.Device.Location;
+using System.Windows.Media;
 
 namespace TransJakartaLocator.Pages
 {
@@ -39,7 +40,7 @@ namespace TransJakartaLocator.Pages
             else
             {
                 MessageBoxResult result =
-                    MessageBox.Show("This app accesses your phone's location. Is that ok?",
+                    MessageBox.Show("Aplikasi ini membutuhkan akses ke lokasi ponsel. Apakah boleh?",
                     "Location", MessageBoxButton.OKCancel);
 
                 if (result == MessageBoxResult.OK)
@@ -49,6 +50,7 @@ namespace TransJakartaLocator.Pages
                 else
                 {
                     IsolatedStorageSettings.ApplicationSettings["LocationConsent"] = false;
+                    return;
                 }
 
                 IsolatedStorageSettings.ApplicationSettings.Save();
@@ -88,6 +90,7 @@ namespace TransJakartaLocator.Pages
                 text.Text = nearest.Name;
                 panel.Children.Add(text);
                 pushpin.Content = panel;
+                pushpin.Background = new SolidColorBrush(Color.FromArgb(255, 50, 50, 255));
 
                 pushpin.GeoCoordinate = new GeoCoordinate(nearest.DoubleLat, nearest.DoubleLon);
                 pushpin.Tap += new EventHandler<System.Windows.Input.GestureEventArgs>(PushpinTap);
@@ -133,8 +136,8 @@ namespace TransJakartaLocator.Pages
                 {
                     content.Visibility = Visibility.Visible;
                 } else if (content.Visibility == Visibility.Visible) {
-                    MessageBoxResult result = MessageBox.Show("Get navigation to the shelter?",
-                        "Confirm", MessageBoxButton.OKCancel);
+                    MessageBoxResult result = MessageBox.Show("Lihat navigasi menuju shelter?",
+                        "Konfirmasi", MessageBoxButton.OKCancel);
 
                     if (result == MessageBoxResult.OK)
                     {
@@ -148,7 +151,7 @@ namespace TransJakartaLocator.Pages
 
         private async Task<GeoCoordinate> GetLocation()
         {
-            if (!(bool)IsolatedStorageSettings.ApplicationSettings["LocationConsent"])
+            if (IsolatedStorageSettings.ApplicationSettings.Contains("LocationConsent") && !(bool)IsolatedStorageSettings.ApplicationSettings["LocationConsent"])
             {
                 return null;
             }
@@ -177,14 +180,14 @@ namespace TransJakartaLocator.Pages
             {
                 if ((uint)ex.HResult == 0x80004004)
                 {
-                    MessageBox.Show("Location is disabled in phone. Enable it from phone settings",
+                    MessageBox.Show("Location tidak diaktifkan. Aktifkan melalui pengaturan ponsel",
                         "Location", MessageBoxButton.OK);
                     
                 }
                 else
                 {
                     MessageBox.Show("Error",
-                        "Something went wrong", MessageBoxButton.OK);
+                        "Terjadi kesalahan.", MessageBoxButton.OK);
                 }
 
                 return null;

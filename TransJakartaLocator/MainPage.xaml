@@ -15,11 +15,26 @@
     shell:SystemTray.IsVisible="True"
     toolkit:TiltEffect.IsTiltEnabled="True">
 
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn" />
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn" />
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="/Assets/Images/bg.png"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- LOCALIZATION NOTE:
@@ -42,25 +57,35 @@
          -->
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="TransJakarta Locator" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
-            <TextBlock Text="Menu" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="0,17,0,28">
+            <Image Source="/Assets/Images/header.png" Margin="0,100,0,0"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <StackPanel>
-                    <ListBoxItem Margin="0,10">
-                        <TextBlock Name="tbFromPoint" Text="From Point" FontSize="40" Tap="tbFromPoint_Tap"/>
-                    </ListBoxItem>
-                    <ListBoxItem Margin="0,10">
-                        <TextBlock Name="tbNearest" Text="Nearest" FontSize="40" Tap="tbNearest_Tap"/>
-                    </ListBoxItem>
-                    <ListBoxItem Margin="0,10">
-                        <TextBlock Name="tbAbout" Text="About" FontSize="40"/>
-                    </ListBoxItem>
+            <StackPanel HorizontalAlignment="Center">
+                <ListBoxItem Margin="0,10">
+                    <Image x:Name="ButtonFromPoint" Source="/Assets/Images/cari.png" Width="400" Tap="ButtonFromPoint_Tap" />
+                </ListBoxItem>
+                <ListBoxItem Margin="0,10">
+                    <Image x:Name="ButtonNearest" Source="/Assets/Images/gps.png" Width="400" Tap="ButtonNearest_Tap" />
+                </ListBoxItem>
+                <!--<ListBoxItem Margin="0,10">
+                    <TextBlock Name="tbFromPoint" Text="From Point" FontSize="40" Tap="tbFromPoint_Tap"/>
+                </ListBoxItem>
+                <ListBoxItem Margin="0,10">
+                    <TextBlock Name="tbNearest" Text="Nearest" FontSize="40" Tap="tbNearest_Tap"/>
+                </ListBoxItem>-->
+                <!--<ListBoxItem Margin="0,10">
+                    <TextBlock Name="tbAbout" Text="About" FontSize="40"/>
+                </ListBoxItem>-->
             </StackPanel>
         </Grid>
+        
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Image x:Name="ButtonAbout" Source="/Assets/Images/about.png" Stretch="None" Tap="ButtonAbout_Tap" />
+            <Image x:Name="ButtonHelp" Source="/Assets/Images/help.png" Stretch="None" Margin="0" Tap="ButtonHelp_Tap" />
+        </StackPanel>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
             aligned on common boundaries.  The image has a top margin of -32px to

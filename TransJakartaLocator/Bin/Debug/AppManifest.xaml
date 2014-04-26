@@ -3,5 +3,6 @@
     <AssemblyPart x:Name="TransJakartaLocator" Source="TransJakartaLocator.dll" />
     <AssemblyPart x:Name="Microsoft.Phone.Controls.Toolkit" Source="Microsoft.Phone.Controls.Toolkit.dll" />
     <AssemblyPart x:Name="Newtonsoft.Json" Source="Newtonsoft.Json.dll" />
+    <AssemblyPart Source="id/TransJakartaLocator.resources.dll" />
   </Deployment.Parts>
 </Deployment>

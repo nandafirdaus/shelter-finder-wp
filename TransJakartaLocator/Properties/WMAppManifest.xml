@@ -1,8 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
-  <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{033b6a9b-a221-478d-bb5c-4e19c93cc93a}" Title="TransJakartaLocator" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="TransJakartaLocator author" Description="Sample description" Publisher="TransJakartaLocator" PublisherID="{b6af4422-9e78-46c0-ade6-4569f2460248}">
-    <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
+  <DefaultLanguage xmlns="" code="id-ID" />
+  <Languages xmlns="">
+    <Language code="id" />
+    <Language code="id-ID" />
+  </Languages>
+  <App xmlns="" ProductID="{033b6a9b-a221-478d-bb5c-4e19c93cc93a}" Title="TransJakarta Finder" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Nanda Firdaus" Description="Aplikasi ini berguna untuk mencari shelter Transjakarta terdekat dengan lokasi anda atau tempat yang ingin anda kunjungi. Aplikasi ini dapat berguna saat anda ingin mengunjungi tempat-tempat baru atau mencari tahu di shelter mana anda harus turun." Publisher="Creafeat" PublisherID="{b6af4422-9e78-46c0-ade6-4569f2460248}">
+    <IconPath IsRelative="true" IsResource="false">transpdark.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
       <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
@@ -18,9 +22,9 @@
     <Tokens>
       <PrimaryToken TokenID="TransJakartaLocatorToken" TaskName="_default">
         <TemplateFlip>
-          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
+          <SmallImageURI IsRelative="true" IsResource="false">transpdark.png</SmallImageURI>
           <Count>0</Count>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
+          <BackgroundImageURI IsRelative="true" IsResource="false">transpdark.png</BackgroundImageURI>
           <Title>TransJakartaLocator</Title>
           <BackContent>
           </BackContent>
